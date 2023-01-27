@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "ECOMMERCE",
+			"path": ".."
+		},
+		{
+			"name": "back_store",
+			"path": "../../../TIENDA/tienda/back_store"
+		},
+		{
+			"name": "store",
+			"path": "../../../TIENDA/tienda/store"
+		}
+	],
+	"settings": {}
+}
