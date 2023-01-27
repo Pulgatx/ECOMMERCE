@@ -25,9 +25,6 @@ export const Header = () => {
   function togleMenu() {
     setMenu(!menu);
   }
-  function togleCarrito() {
-    setMenu(false)
-  }
 
   const tooglefalse = () => {
     setMenu(false);
@@ -92,6 +89,7 @@ export const Header = () => {
 
   const show1 = menu ? "carritos show" : "carritos"
   const show2 = menu ? "carrito show" : "carrito"
+  
 
   return (
     <>

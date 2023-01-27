@@ -16,7 +16,8 @@ export const getAllLogin = async (req, res) => {
 export const getLogin = async (req, res) => {
         try {
             const login = await LoginModel.findAll({
-                where:{ id:req.params.id }
+                where:{ user:req.body.user,
+                        password: req.body.password}
             })
             res.json(login[0])
         } catch (error) {

@@ -8,7 +8,7 @@ export const ProductosList = ({funcion}) => {
 
 	const [blogs, setBlog] = useState([])
 	useEffect(() => {
-		getBlogs()
+		getBlogs()	
 	}, [])
 
 	//procedimineto para mostrar todos los blogs

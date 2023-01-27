@@ -1,55 +1,42 @@
 import './login.css';
-import encriptador from './encripta';
 import React from 'react'
 import axios from 'axios'
-import { useState, useEffect } from 'react'
-
 const URI = 'http://localhost:8000/login'
 
 function Login() {
-    const [Logins, setLogins] = useState([])
-
-    useEffect(() => {
-        getLogins()
-    }, [])
-
-    //procedimineto para mostrar todos los Login
-    const getLogins = async () => {
-        const res = await axios.get(URI)
-        setLogins(res.data)
-    }
-
     var user = '';
     var password = '';
     function getUser(name, value) {
         if (name === 'usuario')
             user = value;
-
-        console.log(user)
     }
 
     function getPassword(name, value) {
         if (name === 'password')
             password = value;
-
-        console.log(password)
     }
 
     function Submit() {
-        var account = { user, password };
-        if (account.user.length > 0 && account.password.length > 0)
-        {   console.log(account);
-
-            Logins.map(login => {
-                if(account.user == login.user){
-                    console.log("usuarios iguales");
-                } else {
-                    alert("Usuario y/o contraseña incorrectos");
-                }
-            });
+        const account = {user: user, password: password}
+        const body = {
+            user: user,
+            password: password
         }
-        else 
-             alert("Por favor no dejes campos vacios");
+        axios.post(URI, body)
+        .then(({data}) => {
+            if(account.user === data.user){
+                console.log("SISEÑOR")
+            } else {
+                console.log("NO JEÑORA")
+            }
+        })    
+
+    }
+
+    function handleAnswerChange(event) {
+            if(event.key === "Enter"  ){
+                Submit();
+        }
     }
 
     return (
@@ -68,7 +55,7 @@ function Login() {
                         <br />
                         <span className="Usuario">Contraseña</span>
                         <div className="password">
-                            <input type="password" id="Contraseña" name="password" onBlur={(e) => { getPassword(e.target.name, e.target.value) }} />
+                            <input type="password" id="Contraseña" name="password" onChange={(e) => { getPassword(e.target.name, e.target.value) }} onKeyUp = {handleAnswerChange} />
                         </div>
                         <button className="btn" onClick={Submit}>ENTRAR</button>
                     </div>
