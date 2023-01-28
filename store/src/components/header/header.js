@@ -9,6 +9,7 @@ const URI = 'http://localhost:8000/blogs'
 
 export const Header = () => {
   const [productos, setProductos] = useState([])
+
 	useEffect(() => {
 		getProductos()
 	}, [])
@@ -18,6 +19,7 @@ export const Header = () => {
 		const res = await axios.get(URI)
 		setProductos(res.data)
 	}
+
   const [menu, setMenu] = useState(false);
   const [carrito, setCarrito] = useState([]);
 
@@ -62,7 +64,7 @@ export const Header = () => {
   }
 
   const removeProducto = id => {
-    if (window.confirm("¿Quieres suspender el producto?")) {
+    if (window.confirm("¿Quieres eliminar el producto del carrito?")) {
       carrito.forEach((item, index) => {
         if (item.id === id) {
           item.cantidad = 1;

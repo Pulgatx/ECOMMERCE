@@ -1,7 +1,7 @@
 import Login from './components/login/login'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Page from './components/Page';
-import { Navigate } from 'react-router-dom';
+import Register from './components/register/register';
 
 function App() {
 
@@ -9,11 +9,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={ <Login/> }/>
-        <Route path="/home" element={ <Page/> }/>
-        <Route path="/" Navigate to="/home" replace={true} />
+        <Route path="/" element={ <Page/> }/>
+        <Route path="/register" element={ <Register/> }/>
       </Routes>
     </BrowserRouter>
   );
+  
 }
-
 export default App;

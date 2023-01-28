@@ -16,7 +16,7 @@ export const ProductosList = ({funcion}) => {
 		const res = await axios.get(URI)
 		setBlog(res.data)
 	}
-
+	
 	return (
 		<>
 			<h1 className="produ">PRODUCTOS</h1>

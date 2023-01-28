@@ -1,9 +1,14 @@
 import './login.css';
 import React from 'react'
 import axios from 'axios'
-const URI = 'http://localhost:8000/login'
+import {useNavigate} from "react-router-dom"
+
+const URI = 'http://localhost:8000/login/user'
+
 
 function Login() {
+    const navigate = useNavigate();
+
     var user = '';
     var password = '';
     function getUser(name, value) {
@@ -16,6 +21,10 @@ function Login() {
             password = value;
     }
 
+    function navigateStore () {
+        navigate("/")
+    }
+
     function Submit() {
         const account = {user: user, password: password}
         const body = {
@@ -24,13 +33,13 @@ function Login() {
         }
         axios.post(URI, body)
         .then(({data}) => {
-            if(account.user === data.user){
-                console.log("SISEÑOR")
-            } else {
-                console.log("NO JEÑORA")
+            if(account.user === data.user && account.password === data.password){
+                navigateStore();
+            } else if (data === "") {
+                alert("Usuario y/o contraseña incorrectos");
             }
-        })    
-
+            console.log({data});
+        });
     }
 
     function handleAnswerChange(event) {

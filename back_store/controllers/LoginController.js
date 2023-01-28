@@ -19,7 +19,7 @@ export const getLogin = async (req, res) => {
                 where:{ user:req.body.user,
                         password: req.body.password}
             })
-            res.json(login[0])
+                res.json(login[0])
         } catch (error) {
             res.json( {message: error.message} )
         }
