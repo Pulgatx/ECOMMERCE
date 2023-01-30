@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.imgAWS {
+    margin: 5px 40px;
+    width: 150px;
+}
+
+span {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+main {
+    background-color: rgb(100, 100, 100);
+    width: 90vw;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.separation{
+    height: 40px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
