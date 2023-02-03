@@ -37,6 +37,7 @@ const products = await ProductModel.findAll({
 
 let productsStock = {}
 let productMinStock = {}
+
 products.forEach(product => {
     productsStock[product.dataValues.id] = product.dataValues.stock;
 });
