@@ -6,7 +6,7 @@ import { ProductosList } from "../productos";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const URI = 'http://localhost:8000/blogs'
+const URI = 'http://localhost:8000/products'
 
 
 export const Header = () => {
@@ -41,31 +41,46 @@ export const Header = () => {
   const addCarrito = (id) =>{
 		const check = carrito.every(item =>{
 			return item.id !== id
-			
 		})
 		if(check){
 			const data = productos.filter(producto =>{
 				return producto.id === id
 			})
 			setCarrito([...carrito, ...data])
+      increase(id);
 		}else{
-			alert("El producto se ha añadido al carrito")
+			alert("El producto ya se encuentra en el carrito")
 		}
 	}
-  const reduce = id => {
+  
+  const reduce = async (id) => {
+    const RES = await axios.get(URI + `/book/${id}?f=unbook`);
     carrito.forEach(item => {
-      if (item.id === id) {
-        item.cantidad === 1 ? item.cantidad = 1 : item.cantidad -= 1;
+      if (item.id === id ) {
+        console.log(RES);
+        if(RES.data === "Unbooked")
+        {
+          item.cantidad -= 1;
+        }
       }
-      setCarrito([...carrito])
+      setCarrito([...carrito]);
     })
   }
-  const increase = id => {
+
+  const increase = async (id) => {
+    const RES = await axios.get(URI + `/book/${id}?f=book`);
     carrito.forEach(item => {
       if (item.id === id) {
-        item.cantidad += 1;
+        console.log(RES);
+        if(RES.data === "Booked")
+        {
+          item.cantidad += 1;
+        }
+        else if(RES.data === "Stockout"){
+          alert("EL PRODUCTO SELECCIONADO YA NO DISPONE DE STOCK");
+        }
       }
-      setCarrito([...carrito])
+      setCarrito([...carrito]);
     })
   }
 
@@ -104,8 +119,6 @@ export const Header = () => {
     setLogout(false);
     sessionStorage.setItem("LOGIN",false);
   }
-  
-  console.log(logout);
   
   return (
     <>
@@ -152,7 +165,7 @@ export const Header = () => {
                         />
                         <p className="cantidad">{producto.cantidad}</p>
                         <box-icon
-                          onClick={() => reduce(producto.id)}
+                          onClick={() => {(producto.cantidad > 1) ? reduce(producto.id) : void(0) }}
                           name="down-arrow"
                           type="solid"
                         />

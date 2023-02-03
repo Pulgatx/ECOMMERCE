@@ -3,7 +3,7 @@ import db from "../database/db.js";
 //importamos sequelize
 import { DataTypes } from "sequelize";
 
- const BlogModel = db.define('inventories', {
+ const ProductModel = db.define('inventories', {
     productName: { type: DataTypes.STRING },
     description: { type: DataTypes.TEXT },
     price: { type: DataTypes.NUMBER },
@@ -16,4 +16,4 @@ import { DataTypes } from "sequelize";
     cantidad: { type: DataTypes.NUMBER }
  })
 
- export default BlogModel
+ export default ProductModel

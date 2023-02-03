@@ -2,11 +2,11 @@ import React from 'react'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
-const URI = 'http://localhost:8000/blogs'
+const URI = 'http://localhost:8000/products' 
 
 export const ProductosList = ({funcion}) => {
 
-	const [Products, setBlog] = useState([])
+	const [Products, setProduct] = useState([])
 	useEffect(() => {
 		getProducts()	
 	}, [])
@@ -14,7 +14,7 @@ export const ProductosList = ({funcion}) => {
 	//procedimineto para mostrar todos los Products
 	const getProducts = async () => {
 		const res = await axios.get(URI)
-		setBlog(res.data)
+		setProduct(res.data)
 	}
 	return (
 		<>

@@ -1,7 +1,7 @@
 //importamos el Modelo
-import ProductModel from "../models/ProductModel.js";
+import ProductModel from "../models/ProductModel.js"
 import { sendMail } from "../mail/mail.js";
-import { productsStock, productMinStock } from "../main.js";
+import { productsStock, productMinStock } from "../app.js";
 
 //** Métodos para el CRUD **/
 
@@ -52,13 +52,14 @@ export const updateProduct = async (req, res) => {
 
 export const bookProduct = async (req, res) => {
     try {
-        console.log(productsStock);
         if (req.query.f === 'unbook'){
             productsStock[req.params.id]++;
+            console.log(productsStock);
             return res.json('Unbooked');
         } else if (req.query.f === 'book') {
             if (productsStock[req.params.id] == 0) return res.json('Stockout')
             productsStock[req.params.id]--;
+            console.log(productsStock);
             return res.json('Booked');
         } 
         res.status(400).json('Bad request');
@@ -68,12 +69,12 @@ export const bookProduct = async (req, res) => {
 }
 
 const updateContent = async (product, quantity) => {
-    const stock = await BlogModel.findAll({
+    const stock = await ProductModel.findAll({
         attributes: ['id', 'stock'],
         where:{ id: product }
     })
     console.log(quantity);
-    await BlogModel.update({stock: stock[0].dataValues.stock - quantity[product]}, {
+    await ProductModel.update({stock: stock[0].dataValues.stock - quantity[product]}, {
         where: {id: product}
     })
     if (productMinStock[product].stockMin >= (stock[0].dataValues.stock - quantity[product])){
