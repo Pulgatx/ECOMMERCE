@@ -26,7 +26,7 @@ export const Header = () => {
   const [menu, setMenu] = useState(false);
   const [carrito, setCarrito] = useState([]);
   const [logout, setLogout] = useState(false);
-
+  const [body, setBody] = useState();
   function togleMenu() {
     if(logout)
       setMenu(!menu);
@@ -47,12 +47,12 @@ export const Header = () => {
 				return producto.id === id
 			})
 			setCarrito([...carrito, ...data])
-      increase(id);
 		}else{
 			alert("El producto ya se encuentra en el carrito")
 		}
 	}
-  
+
+
   const reduce = async (id) => {
     const RES = await axios.get(URI + `/book/${id}?f=unbook`);
     carrito.forEach(item => {
@@ -101,6 +101,8 @@ export const Header = () => {
 	useEffect(() =>{
     if(sessionStorage.getItem("LOGIN"))
       setLogout(true);
+
+    console.log(carrito); 
 		const getTotal = () =>{
 			const res = carrito.reduce((prev, item) =>{
 				return prev + (item.price * item.cantidad)
@@ -118,6 +120,12 @@ export const Header = () => {
   function logoutSesion () {
     setLogout(false);
     sessionStorage.setItem("LOGIN",false);
+  }
+  
+  function payment () {
+    setBody(...body, `'${carrito.id}' : ${carrito.cantidad}`);
+
+    console.log(body);
   }
   
   return (
@@ -186,7 +194,7 @@ export const Header = () => {
 
           <div className="carrito__footer">
             <h3>Total: $ {Intl.NumberFormat({style: 'currency', currency: 'USD',minimumFractionDigits: 0}).format(total)}</h3>
-            <button className="btn">Payment</button>
+            <button className="btn" onClick={payment}>Payment</button>
           </div>
         </div>
       </div>
