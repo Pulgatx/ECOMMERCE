@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import 'boxicons';
+import "boxicons";
 import axios from "axios";
 import { Cont } from "./cont";
 import { ProductosList } from "../productos";
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const URI = 'http://localhost:8000/products'
 
 
-export const Header = () => {
+export  const Header = () => {
   const [productos, setProductos] = useState([])
   const navigate = useNavigate();
 
@@ -209,3 +209,5 @@ export const Header = () => {
     </>
   );
 };
+
+export default Header;

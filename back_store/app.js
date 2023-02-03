@@ -5,8 +5,8 @@ import db from "./database/db.js"
 //importamos nuestro enrutador
 import productRoutes from './routes/routes.js'
 import loginRoutes from './routes/logs.js'
+import paymentRoute from './routes/payment.js'
 import ProductModel from "./models/ProductModel.js"
-import mercadopago from "mercadopago"
 
 const app = express()
 
@@ -14,13 +14,7 @@ app.use(cors())
 app.use(express.json())
 app.use('/products', productRoutes)
 app.use('/login', loginRoutes)
-
-// SDK de Mercado Pago
-const mercadopago = require("mercadopago");
-// Agrega credenciales
-mercadopago.configure({
-  access_token: "TEST-1476143548401444-013009-1a4557acdff952204a36012cb3d94446-1044396861",
-});
+app.use('/pay', paymentRoute)
 
 try {
     await db.authenticate()

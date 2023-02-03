@@ -2,169 +2,52 @@
     padding: 0;
     margin: 0;
 }
-@font-face {
-    font-family: 'Arial Rounded MT Bold';
-    src: url('./arlrdbd.ttf');
-}
+
 body {
     height: 100vh;
     width: 100vw;
-    background-image: url('./img/back.jpeg');
-    background-size:cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 .containerGlobal{
     width: 100vw;
     height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-flow: column;
 }
 
-.background {
-    height: 100vh;
+.containerHeader {
     width: 100vw;
-    background-color: #262626 ;
-    opacity: 50%;
-    position: absolute;
-    z-index: -1;
-}
-
-.containerItems{
-    display: flex;
-    flex-wrap: wrap;
-    width: 100vw;
-    align-items: center;
-    justify-content: center;
-}
-.containerLogo {
-    display: flex;
-    width: 40vw;
-    margin: 3vh 8vw;
-    min-width: 200px;
-    max-width: 400px;
-    position: relative;
-}
-
-
-.logoParche {
-    width: 100%;
-    height: 100%;
-}
-#Usuario {
-    width: 35vw;
-    min-width: 220px;
-    height: 5vh;
-    max-width: 320px;
-    max-height: 40px;
-    font-size: 1.5rem;
-    border: 0.5px solid;
-    background-color: rgba(53, 57, 62, 0.1);
-    border-radius: 8px;
-    font-family: 'Arial bold', Times, serif;
-}
-
-#Contraseña {
-    width: 35vw;
-    min-width: 220px;
-    height: 5vh;
-    max-width: 320px;
-    max-height: 40px;
-    border: 0.5px solid;
-    font-size: 1.5rem;
-    background-color: rgba(53, 57, 62, 0.1);
-    border-radius: 8px;
-}
-.loginTitulo {
-    font-size: 2.5rem;
-    font-family: 'Arial Rounded MT Bold', Times, serif;
-    margin-top: 4vh;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-button {
-    margin-top: 30px;
-    margin-bottom: 10px;
-    width: 10vw;
-}
-span {
-    margin-top: 3vh;
-    margin-bottom: 10px;
-}
-.Usuario {
-    font-size: 1.2rem;
-    font-family: 'Arial Rounded MT Bold', Times, serif;
-}
-
-.containerText {
-    display: flex;
-    align-items: flex-start;
-    flex-flow: column wrap;
-    width: auto;
-    position: absolute;
-    min-width: 250px;
-    margin-top: 10vh;
-
-}
-
-.containerLogin .containerText {
-    text-align: left;
-}
-.containerLogin {
-    float: right;
-    margin-top: 20px;
-    display: flex;
-    flex-flow: column wrap;
-    align-items: center;
-    height: 70vh;
-    min-width: 300px;
-    max-width: 600px;
-    min-height: 300px;
-    box-shadow: 0px 12px 5px 10px rgba(26,26,26,0.3);
-    width: 60vw;
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 25px;
-}
-
-@keyframes zoom {
-    0%   {transform: scale(1);}
-    25%  {transform: scale(1.2);}
-    50%  {transform: scale(1);}
-    75%  {transform: scale(1.1);}
-    100% {transform: scale(1);}
-}
-
-.containerLogin:hover {
-    cursor: pointer;
-    transform: scale(1.02);
-}
-.footerCategory {
-    padding: 1rem;
-    text-align: initial;
-}
-.containerText .btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    width: 15vw;
-    min-width: 120px;
     height: 50px;
-    color: white;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5vh;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 20px;
-    border: 0.5px solid;
     background-color: #262626;
-    box-shadow: -5px 8px 5px 0.1px rgba(26,26,26,0.3);
+    display: flex;
+    color: white;
+    flex-flow: row;
+    justify-content: space-around;
 }
 
-.btn:hover {
-    cursor: pointer;
-    animation: zoom 1s infinite;
+.containerTitle {
+    margin: auto;
+}
+.imagen {
+    width: 300px;
+    height: 100px;
+    background-color: aqua;
+}
+.productos {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+.producto {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.center {
+    margin: auto;
+}
+
+.inputTitle {
+    margin-bottom: 20px;
 }

@@ -11,30 +11,34 @@
 
 <body>
     <div class="containerGlobal">
-        <div class="background"> </div>
-        <div class="containerItems">
-            <div class="containerLogo">
-                <img class="logoParche" src="./AWS.png" alt="logoAWS" />
+        <div class="containerHeader">
+            <div class="containerTitle"> ADMINISTRADOR</div>
+            <div class="containerTitle"> LOG OUT</div>
+            <div class="containerTitle"> MODIFICAR ADMINISTRADOR</div>
+        </div>
+        <br>
+        <h1 class="produ">PRODUCTOS</h1>
+        <br>
+        <div class="productos">
+            <br>
+            <div class="imagen">
+                <img src="#">
             </div>
-            <div class="containerLogin">
-                <div class="loginTitulo">Sign Up</div>
-                <br />
-                <div class="containerText">
-                    <span class="Usuario">Username</span>
-                    <input type="text" id="Usuario" name="usuario">
-                    <br />
-                    <span class="Usuario">Password</span>
-                    <div class="password">
-                        <input type="password" id="Contraseña" name="password">
-                    </div>
-                    <span class="Usuario">Adress</span>
-                    <input type="text" id="Usuario" name="usuario">
-                    <br />
-                    <span class="Usuario">Email</span>
-                    <div class="password">
-                        <input type="text" id="Contraseña" name="password">
-                    </div>
-                    <button class="btn">REGISTER</button>
+            <div class="producto">
+                <div class="productName center">
+                    <h3 class="inputTitle" >STOCK MINIMO</h3>
+                    <input type="text" name="stockMin" id="1" value = "1234" placeholder="123">
+                </div>
+                <div class="productName center">
+                    <h3 class="inputTitle">STOCK MAXIMO</h3>
+                    <input type="text" name="stockMax" id="1" value = "1234" placeholder="123">
+                </div>
+                <div class="productName center">
+                    <h3 class="inputTitle">VALOR PRODUCTO</h3>
+                    <input type="text" name="price" id="1" value = "1234" placeholder="123">
+                </div>
+                <div class="bottom center">
+                    <button class="btn" >GUARDAR CAMBIOS</button>
                 </div>
             </div>
         </div>
