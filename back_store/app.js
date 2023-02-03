@@ -20,9 +20,9 @@ try {
     console.log(`El error de conexión es: ${error}`)
 }
 
-/* app.get('/', (req, res)=>{
+app.get('/', (req, res)=>{
     res.send('HOLA MUNDO')
-}) */
+})
 
 app.listen(8000, ()=>{
     console.log('Server UP running in http://localhost:8000/')
