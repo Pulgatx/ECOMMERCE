@@ -3,7 +3,7 @@ import React from 'react'
 import axios from 'axios'
 import {useNavigate} from "react-router-dom"
 
-const URI = 'https://servidor-1b10.onrender.com/login'
+const URI = 'http://localhost:8000/login'
 
 function Register() {
     var user = '';
@@ -42,7 +42,7 @@ function Register() {
         axios.post(URI, body)
 
         .then(({data}) => {
-            if(data.message == "¡Registro creado correctamente!"){
+            if(data.message === "¡Registro creado correctamente!"){
                 sessionStorage.setItem("LOGIN", true);
                 navigate("/")
             }    

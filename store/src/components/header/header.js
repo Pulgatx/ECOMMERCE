@@ -6,7 +6,7 @@ import { ProductosList } from "../productos";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const URI = 'https://servidor-1b10.onrender.com/blogs'
+const URI = 'http://localhost:8000/blogs'
 
 
 export const Header = () => {
@@ -25,10 +25,10 @@ export const Header = () => {
 
   const [menu, setMenu] = useState(false);
   const [carrito, setCarrito] = useState([]);
-
+  const [logout, setLogout] = useState(false);
 
   function togleMenu() {
-    if(sessionStorage.getItem("LOGIN"))
+    if(logout)
       setMenu(!menu);
     else
       navigate('login');
@@ -84,6 +84,8 @@ export const Header = () => {
   const [total, setTotal] = useState(0);
 
 	useEffect(() =>{
+    if(sessionStorage.getItem("LOGIN"))
+      setLogout(true);
 		const getTotal = () =>{
 			const res = carrito.reduce((prev, item) =>{
 				return prev + (item.price * item.cantidad)
@@ -93,12 +95,18 @@ export const Header = () => {
 		getTotal()
 	},[carrito])
 
-
+  const logged = (logout) ? "logout show" : "logout none"
 
   const show1 = menu ? "carritos show" : "carritos"
   const show2 = menu ? "carrito show" : "carrito"
   
-
+  function logoutSesion () {
+    setLogout(false);
+    sessionStorage.setItem("LOGIN",false);
+  }
+  
+  console.log(logout);
+  
   return (
     <>
       <header>
@@ -112,6 +120,7 @@ export const Header = () => {
             <Link to="/">PRODUCTOS</Link>
           </li>
         </ul>
+        <div className={logged} onClick={logoutSesion}> LOG OUT </div>
         <div className="cart" onClick={togleMenu}>
           <box-icon name="cart" type="solid" color="#ffffff"></box-icon>
           <Cont 

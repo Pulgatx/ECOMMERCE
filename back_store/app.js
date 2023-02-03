@@ -27,3 +27,19 @@ app.get('/', (req, res)=>{
 app.listen(8000, ()=>{
     console.log('Server UP running in http://localhost:8000/')
 })
+
+const products = await BlogModel.findAll({
+    attributes: ['id', 'stock', 'stockMin', 'productName']
+})
+
+
+let productsStock = {}
+let productMinStock = {}
+products.forEach(product => {
+    productsStock[product.dataValues.id] = product.dataValues.stock;
+});
+products.forEach(product => {
+    productMinStock[product.dataValues.id] = {stockMin: product.dataValues.stockMin, productName: product.dataValues.productName};
+});
+console.log(productMinStock);
+export {productsStock, productMinStock};//exportation

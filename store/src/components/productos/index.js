@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
-const URI = 'https://servidor-1b10.onrender.com/blogs'
+const URI = 'http://localhost:8000/blogs'
 
 export const ProductosList = ({funcion}) => {
 
@@ -16,7 +16,6 @@ export const ProductosList = ({funcion}) => {
 		const res = await axios.get(URI)
 		setBlog(res.data)
 	}
-	console.log(Products);
 	return (
 		<>
 			<h1 className="produ">PRODUCTOS</h1>

@@ -2,9 +2,8 @@ import './login.css';
 import React from 'react'
 import axios from 'axios'
 import {useNavigate} from "react-router-dom"
-import { Link } from 'react-router-dom';
 
-const URI = 'https://servidor-1b10.onrender.com/login/user'
+const URI = 'http://localhost:8000/login/user'
 
 
 function Login() {
