@@ -26,7 +26,7 @@ export const Header = () => {
   const [menu, setMenu] = useState(false);
   const [carrito, setCarrito] = useState([]);
   const [logout, setLogout] = useState(false);
-  const [body, setBody] = useState();
+
   function togleMenu() {
     if(logout)
       setMenu(!menu);
@@ -46,6 +46,7 @@ export const Header = () => {
 			const data = productos.filter(producto =>{
 				return producto.id === id
 			})
+      increase(id);
 			setCarrito([...carrito, ...data])
 		}else{
 			alert("El producto ya se encuentra en el carrito")
@@ -57,7 +58,6 @@ export const Header = () => {
     const RES = await axios.get(URI + `/book/${id}?f=unbook`);
     carrito.forEach(item => {
       if (item.id === id ) {
-        console.log(RES);
         if(RES.data === "Unbooked")
         {
           item.cantidad -= 1;
@@ -71,7 +71,6 @@ export const Header = () => {
     const RES = await axios.get(URI + `/book/${id}?f=book`);
     carrito.forEach(item => {
       if (item.id === id) {
-        console.log(RES);
         if(RES.data === "Booked")
         {
           item.cantidad += 1;
@@ -101,8 +100,6 @@ export const Header = () => {
 	useEffect(() =>{
     if(sessionStorage.getItem("LOGIN"))
       setLogout(true);
-
-    console.log(carrito); 
 		const getTotal = () =>{
 			const res = carrito.reduce((prev, item) =>{
 				return prev + (item.price * item.cantidad)
@@ -121,11 +118,19 @@ export const Header = () => {
     setLogout(false);
     sessionStorage.setItem("LOGIN",false);
   }
-  
-  function payment () {
-    setBody(...body, `'${carrito.id}' : ${carrito.cantidad}`);
 
-    console.log(body);
+  function buyProduct(e) {
+    e.preventDefault();
+    let body = {}
+    carrito.forEach ( item => {
+      body[`${item.id}`] = item.cantidad;
+    })
+    const res = axios.put(URI + "/buy", (body))
+    if(res.data === "Successful purchase")
+      alert("EDITADO");
+      else
+        alert("HOLA")
+
   }
   
   return (
@@ -194,7 +199,7 @@ export const Header = () => {
 
           <div className="carrito__footer">
             <h3>Total: $ {Intl.NumberFormat({style: 'currency', currency: 'USD',minimumFractionDigits: 0}).format(total)}</h3>
-            <button className="btn" onClick={payment}>Payment</button>
+            <button className="btn" onClick={buyProduct}>Payment</button>
           </div>
         </div>
       </div>

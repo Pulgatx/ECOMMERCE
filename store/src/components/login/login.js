@@ -39,7 +39,6 @@ function Login() {
             } else if (data === "") {
                 alert("Usuario y/o contraseña incorrectos");
             }
-            console.log({data});
         });
     }
 

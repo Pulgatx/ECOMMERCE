@@ -54,12 +54,10 @@ export const bookProduct = async (req, res) => {
     try {
         if (req.query.f === 'unbook'){
             productsStock[req.params.id]++;
-            console.log(productsStock);
             return res.json('Unbooked');
         } else if (req.query.f === 'book') {
             if (productsStock[req.params.id] == 0) return res.json('Stockout')
             productsStock[req.params.id]--;
-            console.log(productsStock);
             return res.json('Booked');
         } 
         res.status(400).json('Bad request');
@@ -73,7 +71,6 @@ const updateContent = async (product, quantity) => {
         attributes: ['id', 'stock'],
         where:{ id: product }
     })
-    console.log(quantity);
     await ProductModel.update({stock: stock[0].dataValues.stock - quantity[product]}, {
         where: {id: product}
     })
@@ -84,7 +81,6 @@ const updateContent = async (product, quantity) => {
 
 export const buyProducts = async (req, res) => {
     try {
-        console.log(typeof(req.body));
         Object.keys(req.body).forEach(product => updateContent(product, req.body));
         res.json("Successful purchase");
     } catch (error) {

@@ -6,6 +6,7 @@ import db from "./database/db.js"
 import productRoutes from './routes/routes.js'
 import loginRoutes from './routes/logs.js'
 import ProductModel from "./models/ProductModel.js"
+import mercadopago from "mercadopago"
 
 const app = express()
 
@@ -14,6 +15,12 @@ app.use(express.json())
 app.use('/products', productRoutes)
 app.use('/login', loginRoutes)
 
+// SDK de Mercado Pago
+const mercadopago = require("mercadopago");
+// Agrega credenciales
+mercadopago.configure({
+  access_token: "TEST-1476143548401444-013009-1a4557acdff952204a36012cb3d94446-1044396861",
+});
 
 try {
     await db.authenticate()
@@ -44,6 +51,6 @@ products.forEach(product => {
 products.forEach(product => {
     productMinStock[product.dataValues.id] = {stockMin: product.dataValues.stockMin, productName: product.dataValues.productName};
 });
-console.log(productMinStock);
-console.log(productsStock);
+// console.log(productMinStock);
+// console.log(productsStock);
 export {productsStock, productMinStock};//exportation
