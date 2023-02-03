@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAllBlogs, getBlog, createBlog, updateBlog} from '../controllers/BlogController.js'
+import { getAllBlogs, getBlog, createBlog, updateBlog} from '../controllers/ProductController.js'
 const router = express.Router()
 
 router.get('/', getAllBlogs)

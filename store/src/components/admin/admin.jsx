@@ -1,7 +1,7 @@
 import React from 'react'
 import './admin.css'
 
-const URI = 'http://localhost:8000/login/user'
+    // const URI = 'http://localhost:8000/login/user'
 
 function Admin() {
     return (

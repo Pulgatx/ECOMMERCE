@@ -1,13 +1,18 @@
 import './register.css';
 import React from 'react'
 import axios from 'axios'
-const URI = 'http://localhost:8000/login'
+import {useNavigate} from "react-router-dom"
+
+const URI = 'https://servidor-1b10.onrender.com/login'
 
 function Register() {
     var user = '';
     var password = '';
     var email = '';
     var adress = '';
+    var phone = '';
+
+    const navigate = useNavigate();
 
     function getInput(name, value) {
         if (name === 'usuario')
@@ -16,6 +21,8 @@ function Register() {
             email = value;
         else if(name === 'adress')
             adress = value;
+        else if(name === 'phone')
+            phone = value;
     }
 
     function getPassword(name, value) {
@@ -24,28 +31,28 @@ function Register() {
     }
 
     function Submit() {
-        const account = {user: user, password: password, email: email, adress: adress}
         const body = {
-            user: user,
+            username: user,
             password: password,
             email: email, 
-            adress: adress
+            adress: adress,
+            telephone: parseInt(phone)
         }
 
-        console.log(account);
         axios.post(URI, body)
-        .then(({data}) => {
-            if(account.user === data.user){
-                console.log("SISEÑOR")
-            } else {
-                console.log("NO JEÑORA")
-            }
-        })    
 
+        .then(({data}) => {
+            if(data.message == "¡Registro creado correctamente!"){
+                sessionStorage.setItem("LOGIN", true);
+                navigate("/")
+            }    
+            else
+                alert("El usuario y/o el correo ya existen")
+        })
     }
 
     function handleAnswerChange(event) {
-            if(event.key === "Enter"  ){
+            if(event.key === "Enter"){
                 Submit();
         }
     }
@@ -69,6 +76,9 @@ function Register() {
                         <br />
                         <span className="Usuario">Adress</span>
                         <input type="text" id="Adress" name="adress" onBlur={(e) => { getInput(e.target.name, e.target.value) }} />
+                        <br />
+                        <span className="Usuario">Phone Number</span>
+                        <input type="text" id="Phone" name="phone" onBlur={(e) => { getInput(e.target.name, e.target.value) }} />
                         <br />
                         <span className="Usuario">Password</span>
                         <div className="password">

@@ -3,12 +3,15 @@ import 'boxicons';
 import axios from "axios";
 import { Cont } from "./cont";
 import { ProductosList } from "../productos";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const URI = 'http://localhost:8000/blogs'
+const URI = 'https://servidor-1b10.onrender.com/blogs'
 
 
 export const Header = () => {
   const [productos, setProductos] = useState([])
+  const navigate = useNavigate();
 
 	useEffect(() => {
 		getProductos()
@@ -25,7 +28,10 @@ export const Header = () => {
 
 
   function togleMenu() {
-    setMenu(!menu);
+    if(sessionStorage.getItem("LOGIN"))
+      setMenu(!menu);
+    else
+      navigate('login');
   }
 
   const tooglefalse = () => {
@@ -96,14 +102,14 @@ export const Header = () => {
   return (
     <>
       <header>
-        <a href="#">
+        <Link to="/">
           <div className="logo">
-            <img src="./AWS.png" alt="LOGO" width="150" />
+            <img src="./AWS.png" alt="LOGO" width="150"/>
           </div>
-        </a>
+        </Link>
         <ul>
           <li>
-            <a href="#">PRODUCTOS</a>
+            <Link to="/">PRODUCTOS</Link>
           </li>
         </ul>
         <div className="cart" onClick={togleMenu}>
@@ -125,7 +131,7 @@ export const Header = () => {
                 {
                   carrito.map((producto) => (
                     <div className="carrito__item" key={producto.id}>
-                      <img src={producto.img1} alt={producto.name} />
+                      <img src={producto.img2} alt={producto.name}/>
                       <div>
                         <h3> {producto.name} </h3>
                         <p className="price">$ {Intl.NumberFormat({style: 'currency', currency: 'USD',minimumFractionDigits: 0}).format(producto.price)}</p>

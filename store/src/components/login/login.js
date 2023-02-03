@@ -2,8 +2,9 @@ import './login.css';
 import React from 'react'
 import axios from 'axios'
 import {useNavigate} from "react-router-dom"
+import { Link } from 'react-router-dom';
 
-const URI = 'http://localhost:8000/login/user'
+const URI = 'https://servidor-1b10.onrender.com/login/user'
 
 
 function Login() {
@@ -28,13 +29,14 @@ function Login() {
     function Submit() {
         const account = {user: user, password: password}
         const body = {
-            user: user,
-            password: password
+            username: account.user,
+            password: account.password
         }
         axios.post(URI, body)
         .then(({data}) => {
-            if(account.user === data.user && account.password === data.password){
+            if(account.user === data.username && account.password === data.password){
                 navigateStore();
+                sessionStorage.setItem("LOGIN", true);
             } else if (data === "") {
                 alert("Usuario y/o contraseña incorrectos");
             }
@@ -48,6 +50,9 @@ function Login() {
         }
     }
 
+    function navigateRegister () {
+        navigate("/register");
+    }
     return (
         <div className="containerGlobal">
             <div className="background"> </div>
@@ -67,6 +72,8 @@ function Login() {
                             <input type="password" id="Contraseña" name="password" onChange={(e) => { getPassword(e.target.name, e.target.value) }} onKeyUp = {handleAnswerChange} />
                         </div>
                         <button className="btn" onClick={Submit}>ENTRAR</button>
+                        <br/>
+                        <div class="redirection" onClick={navigateRegister}> SIGN UP</div>
                     </div>
                 </div>
             </div>

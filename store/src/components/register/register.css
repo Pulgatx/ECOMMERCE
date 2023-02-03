@@ -5,7 +5,7 @@
 .registerTitulo {
     font-size: 2.5rem;
     font-family: 'Arial Rounded MT Bold', Times, serif;
-    margin-top: 4vh;
+    margin-top: 2vh;
     margin-left: auto;
     margin-right: auto;
 }
@@ -15,7 +15,7 @@
     display: flex;
     flex-flow: column wrap;
     align-items: center;
-    height: 70vh;
+    height: 80vh;
     min-width: 300px;
     max-width: 600px;
     min-height: 300px;
@@ -24,7 +24,7 @@
     background-color: rgba(255, 255, 255, 0.85);
     border-radius: 25px;
 }
-#Email, #Adress {
+#Email, #Adress, #Phone {
     width: 35vw;
     min-width: 220px;
     height: 5vh;

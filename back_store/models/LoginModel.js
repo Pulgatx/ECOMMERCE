@@ -4,8 +4,11 @@ import db from "../database/db.js";
 import { DataTypes } from "sequelize";
 
  const LoginModel = db.define('users', {
-     user: { type: DataTypes.STRING },
-     password: { type: DataTypes.STRING },
+    username: {type: DataTypes.STRING},
+    password: {type: DataTypes.STRING},
+    adress: {type: DataTypes.STRING},
+    telephone: {type: DataTypes.INTEGER},
+    email: {type: DataTypes.STRING},
  })
 
  export default LoginModel
