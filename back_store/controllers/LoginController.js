@@ -24,6 +24,17 @@ export const getLogin = async (req, res) => {
             res.json( {message: error.message} )
         }
 }
+
+export const getAdmin = async (req, res) => {
+    try {
+        const login = await LoginModel.findAll({
+            where:{ username: 'admin'}
+        })
+            res.json(login[0])
+    } catch (error) {
+        res.json( {message: error.message} )
+    }
+}
 //Crear un registro
 export const createLogin = async (req, res) => {
     try {

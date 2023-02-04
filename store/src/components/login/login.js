@@ -24,6 +24,10 @@ function Login() {
     function navigateStore () {
         navigate("/")
     }
+    
+    function navigateAdmin () {
+        navigate("/admin")
+    }
 
     function Submit() {
         const account = {user: user, password: password}
@@ -33,9 +37,17 @@ function Login() {
         }
         axios.post(URI, body)
         .then(({data}) => {
-            if(account.user === data.username && account.password === data.password){
-                navigateStore();
+            if(account.user ==="admin" && account.user === data.username && account.password === data.password){
+                console.log(data);
                 sessionStorage.setItem("LOGIN", true);
+                sessionStorage.setItem("User", data);
+                console.log(sessionStorage.getItem("User"));
+                sessionStorage.setItem("ADMIN",true);
+                navigateAdmin();
+            } else if(account.user === data.username && account.password === data.password){
+                sessionStorage.setItem("LOGIN", true);
+                sessionStorage.setItem("ADMIN",false)
+                navigateStore();
             } else if (data === "") {
                 alert("Usuario y/o contraseña incorrectos");
             }

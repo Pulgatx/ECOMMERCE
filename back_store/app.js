@@ -5,8 +5,8 @@ import db from "./database/db.js"
 //importamos nuestro enrutador
 import productRoutes from './routes/routes.js'
 import loginRoutes from './routes/logs.js'
-import paymentRoute from './routes/payment.js'
 import ProductModel from "./models/ProductModel.js"
+import payRoutes from "./routes/payment.js"
 
 const app = express()
 
@@ -14,7 +14,7 @@ app.use(cors())
 app.use(express.json())
 app.use('/products', productRoutes)
 app.use('/login', loginRoutes)
-app.use('/pay', paymentRoute)
+app.use('/pay', payRoutes)
 
 try {
     await db.authenticate()

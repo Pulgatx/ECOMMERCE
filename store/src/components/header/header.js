@@ -5,9 +5,12 @@ import { Cont } from "./cont";
 import { ProductosList } from "../productos";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Payment } from "../payment/payment.js"
+import {Elements} from "@stripe/react-stripe-js"
+import { loadStripe } from "@stripe/stripe-js";
 
 const URI = 'http://localhost:8000/products'
-
+const stripePromise = loadStripe("pk_test_51MXWocACjjHA9OsctSrFESXgI8TJQDOBdkbTJiMTVnS2bV9CBik62QfurJRTqUWsnSTf6E3ZnTOTAmd0Pwab9sgy00cIganxen");
 
 export  const Header = () => {
   const [productos, setProductos] = useState([])
@@ -37,7 +40,9 @@ export  const Header = () => {
   const tooglefalse = () => {
     setMenu(false);
   };
-
+  function buy () {
+    buyProduct();
+  }
   const addCarrito = (id) =>{
 		const check = carrito.every(item =>{
 			return item.id !== id
@@ -100,6 +105,9 @@ export  const Header = () => {
 	useEffect(() =>{
     if(sessionStorage.getItem("LOGIN"))
       setLogout(true);
+    else
+      setLogout(false)
+
 		const getTotal = () =>{
 			const res = carrito.reduce((prev, item) =>{
 				return prev + (item.price * item.cantidad)
@@ -119,18 +127,12 @@ export  const Header = () => {
     sessionStorage.setItem("LOGIN",false);
   }
 
-  function buyProduct(e) {
-    e.preventDefault();
+  function buyProduct( ) {
     let body = {}
     carrito.forEach ( item => {
       body[`${item.id}`] = item.cantidad;
     })
-    const res = axios.put(URI + "/buy", (body))
-    if(res.data === "Successful purchase")
-      alert("EDITADO");
-      else
-        alert("HOLA")
-
+    axios.put(URI + "/buy", (body))
   }
   
   return (
@@ -199,7 +201,12 @@ export  const Header = () => {
 
           <div className="carrito__footer">
             <h3>Total: $ {Intl.NumberFormat({style: 'currency', currency: 'USD',minimumFractionDigits: 0}).format(total)}</h3>
-            <button className="btn" onClick={buyProduct}>Payment</button>
+            <Elements stripe={stripePromise}>
+                <Payment 
+                      amount={total}
+                      funcion = {buy}/>
+            </Elements>
+            {/* <button className="btn"  onClick={buyProduct}>Payment</button> */}
           </div>
         </div>
       </div>
